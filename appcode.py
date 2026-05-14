@@ -322,11 +322,11 @@ def check_alerts_and_notify():
                 "triggered_at": alert["triggered_at"]
             }
             st.session_state.alert_history.append(record)
-            st.toast(f"ALERT: {symbol} {alert['alert_type']} — Current ${latest_price:.2f}")
+            st.toast(f"ALERT: {symbol} {alert['alert_type']} — Current ₹{latest_price:.2f}")
             
             # Email
             subject = f"Stock Alert: {symbol} {alert['alert_type']}"
-            body = f"Your alert for {symbol} was triggered.\nTarget: ${alert['target_price']:.2f}\nCurrent: ${latest_price:.2f}\nTime (UTC): {alert['triggered_at']}"
+            body = f"Your alert for {symbol} was triggered.\nTarget: ₹{alert['target_price']:.2f}\nCurrent: ${latest_price:.2f}\nTime (UTC): {alert['triggered_at']}"
             success, err = send_email(alert["recipient_email"], subject, body)
             if success: st.success(f"Email sent to {alert['recipient_email']}")
             else: st.error(f"Failed sending email: {err}")
